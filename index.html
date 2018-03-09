@@ -1,0 +1,218 @@
+<!--===============================================Made BY Dilip Agarwal===========================================-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	<meta charset="utf-8">
+	
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta name="google-site-verification" content="" />
+	
+    <meta name="description" content="Rock Paper Scissor Game">
+	
+	<meta name="robots" content="index,follow">
+	<meta name="keywords" content="Rock Paper Scissor, RPS, game, Dilip Agarwal, github, vit university, vellore, , projects, youth4work, linkedin, e-tuitions, contact, resume, bio"/>
+    <meta name="author" content="Dilip Agarwal">
+	<meta name="email" content="contactdilipagarwal@gmail.com">
+	<meta name="copyright" content="Dilip Agarwal 2018"/>
+			
+	<meta property="og:type" content="webpage" /> 
+	<meta property="og:title" content="Rock Paper Scissor | Game" />
+	<meta property="og:description" content="Rock Paper Scissor Game"/>
+
+	<meta property="og:image" content="" />
+	
+	<meta property="og:url" content="" />
+	<meta property="og:site_name" content="Rock Paper Scissor | Game" />
+
+	<meta name="twitter:card" content="website">
+	<meta name="twitter:site" content="Dilip Agarwal">
+	<meta name="twitter:title" content="Rock Paper Scissor | Game">
+	<meta name="twitter:description" content="">
+	<meta name="twitter:creator" content="@dilipagarwal001">
+	<meta name="twitter:image" content="">
+
+	<meta itemprop="name" content="Rock Paper Scissor">
+	<meta itemprop="description" content="Rock Paper Scissor Game">
+	<meta itemprop="image" content="">
+	
+	<title>Rock Paper Scissor</title>
+	
+	
+	<link rel="stylesheet" href="css/customanimate.css">
+	<link href="css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="css/newstyle.css" rel="stylesheet"/>
+	
+	<script src="js/wow.min.js"></script>
+              <script>
+              wow = new WOW(
+			{
+			boxClass:     'wow',      // default
+			animateClass: 'animated', // default
+			offset:       0,          // default
+			mobile:       false,       // default
+			live:         true        // default
+			}
+							)
+			wow.init();
+    </script>
+	
+</head>
+<body style="background-image:url('images/bg1.jpg')">
+
+
+	<div class="container text-center" id="heading">
+		<div class="row">
+			<h1 class="text-center" style="color:#fff" id="title"><b>Rock Paper Scissor</b></h1>
+			<h4 class="text-center text-warning" id="headingtext">You Will Play Against Computer</h4>
+		</div>
+		<div class="col-xs-12 text-center" id="startbtn">
+			<a href="#choices"><img class="img-circle"  onclick="showchoice()" src="images/playnow.png"/></a>		
+		</div>
+	</div>
+	
+	<audio id="myAudio">
+		<source src="audio sound/beep.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+		<audio id="buttonclick">
+			<source src="audio sound/Mouseclick.wav" type="audio/wav">
+			Your browser does not support the audio element.
+		</audio>
+	<div class="container zoom">
+		<div class="row frame">
+			<div class="col-md-offset-1 col-md-2 col-xs-offset-0 text-center">
+				<div class="choices animated bounceInLeft" id="choices" data-wow-duration="1.5s" style="display:none;">
+					<button class="rockbtn btn-circle" id="0" onclick="computerchoice(0)"><img class="img-circle" src="images/rock.jpg" width="200px;"></button><br><br>
+					<button class="paperbtn" id="1" onclick="computerchoice(1)"><img class="img-circle" src="images/paper.jpg" width="200px;"></button><br><br>
+					<button class="scissorbtn" id="2" onclick="computerchoice(2)"><img class="img-circle"src="images/scissors.png" width="200px;"></button>
+					
+				</div>
+			</div>
+			<div class="col-md-offset-4 col-md-1 col-xs-offset-3 col-xs-2" id="computerchoice">
+				
+			</div>
+			<div class="col-md-offset-3 col-xs-offset-3 text-center wow bounceInRight" id="table" style="display:none;">
+				<table height="220px" class=" table-bordered" style="background-color:white" width="350px" >
+					<thead class="">
+						<th colspan="2" class="text-center"><h2><b>Your Score</b></h2></th>
+					</thead>
+					<tbody>
+						<tr>
+							<td id="won" class="text-success"><h2>Won</h2><h2>0</h2></td>
+							<td id="lose" class="text-success"><h2>Lose</h2><h2>0</h2></td>
+						</tr>
+					</tbody>
+				</table>
+				<br><br>
+				<button class="btn resetgame" id="resetgame" onclick=location.reload() style="display:none;">
+					Reset Game
+				</button>
+			</div>
+		</div>
+		<div class="row text-center" style="padding-top:1em;">
+			<div class="col-xs-12" id="winloosmessage">
+			</div>
+		</div>
+	</div>
+	
+	<script>
+	var scale = 'scale(0.9)';
+	document.body.style.webkitTransform =  scale;    
+	document.body.style.msTransform =   scale;      
+	document.body.style.transform = scale;    
+	var won=0,lose=0;
+	var lastchoice=0;
+	function showchoice() {
+	var audio = document.getElementById("myAudio");
+	audio.play();
+	
+	document.body.style.backgroundImage = "url('images/bg.jpg')";
+	document.body.style.position = "relative";
+	
+    document.getElementById('choices').style.display='';
+	
+	document.getElementById('startbtn').style.display='none';
+	document.getElementById('headingtext').innerHTML='<h4>You are Playing Against Computer</h4><br><br>';
+	
+	document.getElementById('table').style.display='';
+	document.getElementById('headingtext').style.padding='0px';
+	document.getElementById('title').style.color='Blue';
+	}
+	
+	function computerchoice(userchoice)
+	{
+	
+		document.getElementById('resetgame').style.display='';
+		var buttonclick= document.getElementById("buttonclick");
+			buttonclick.play();
+		
+		items=['computerrock','computerpaper','computerscissor'];
+		var computerchoose=Math.floor(Math.random()*items.length);
+		var picture=items[computerchoose];
+		document.getElementById('computerchoice').innerHTML=
+		'<button class="computerbtn wow bounceInRight"><img class="img-circle" width="200px" src="images/'+picture+'.jpg"></button>';
+		document.getElementById(lastchoice).style.border='5px solid #25ACDF';	
+		document.getElementById(lastchoice).style.background='white';	
+		lastchoice=userchoice;
+		document.getElementById(userchoice).style.border='5px solid yellow';
+		document.getElementById(userchoice).style.background='red';
+		
+		//logic for rock paper scissor game
+		if(userchoice==computerchoose)//i.e. computer choose same as user
+		{	
+			document.getElementById('winloosmessage').innerHTML='<h2 style="color:#FFAA55">The result is a tie!</h2>';
+		}
+		else
+		{
+			switch(userchoice)
+			{
+				case 0:
+					if(computerchoose==1)
+					{
+						document.getElementById('winloosmessage').innerHTML='<h2 style=color:#A72727>Opps!! You  Lose</h2>';
+						lose++;
+					}	
+					else
+					{
+						document.getElementById('winloosmessage').innerHTML='<h2 style="color:#52A727">Congratulations!!<br> You Won</h2>';
+						won++;
+					}
+					break;
+				case 1:
+					if(computerchoose==2)
+					{
+						document.getElementById('winloosmessage').innerHTML='<h2 style=color:#A72727>Opps!! You  Lose</h2>';
+						lose++;
+					}	
+					else
+					{
+						document.getElementById('winloosmessage').innerHTML='<h2 style="color:#52A727">Congratulations!!<br> You Won</h2>';
+						won++;
+					}
+					break;
+				case 2:
+					if(computerchoose==0)
+					{
+						document.getElementById('winloosmessage').innerHTML='<h2 style=color:#A72727>Opps!! You  Lose</h2>';
+						lose++;
+					}
+						
+					else
+					{
+						document.getElementById('winloosmessage').innerHTML='<h2 style="color:#52A727">Congratulations!!<br> You Won</h2>';
+						won++;
+					}
+					break;
+			}
+		}
+		document.getElementById('won').innerHTML='<h2>Won</h2><h2>'+won+'</h2><br>';
+		document.getElementById('lose').innerHTML='<h2>Lose</h2><h2>'+lose+'</h2><br>';
+	}
+	</script>
+</body>
+</html>
+<!--===========================================Made BY Dilip Agarwal==================================================-->
